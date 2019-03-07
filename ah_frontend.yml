@@ -15,10 +15,6 @@
     REACT_APP_API: https://ah-codetitans-staging.herokuapp.com/
 
   tasks:
-  # Start with installation tasks
-  - name: Add Certbot-repository
-    apt_repository: repo='ppa:certbot/certbot' state=present
-
   - name: Install gpg key for node js
     apt_key:
       url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
@@ -36,8 +32,9 @@
       state: latest
 
   - name: install certbot
-    apt:
-      name: python-certbot-nginx
+    npm:
+      name: forever
+      global: yes
       state: latest
 
   - name: install nodejs
@@ -93,12 +90,12 @@
 
 # File to run command
   - name: Bash script to run the application
-    shell:
+    shell: |
       touch /home/ubuntu/ah-code-titans-frontend/start_ah.sh && chmod u+x /home/ubuntu/ah-code-titans-frontend/start_ah.sh
       echo "npm run start-js" | tee /home/ubuntu/ah-code-titans-frontend/start_ah.sh
 
 # Start the application
   - name: Start the application
-    shell:
+    shell: |
       sudo systemctl daemon-reload
       sudo systemctl start keep_alive_ah
