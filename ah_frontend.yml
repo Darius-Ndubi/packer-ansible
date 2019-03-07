@@ -11,9 +11,6 @@
     ansible_dest_release: "trusty"
     ansible_python_interpreter: "/usr/bin/python3"
 
-  environment:
-    REACT_APP_API: https://ah-codetitans-staging.herokuapp.com/
-
   tasks:
   - name: Install gpg key for node js
     apt_key:
@@ -29,12 +26,6 @@
   - name: install nginx
     apt:
       name: nginx
-      state: latest
-
-  - name: install certbot
-    npm:
-      name: forever
-      global: yes
       state: latest
 
   - name: install nodejs
@@ -66,7 +57,6 @@
       src: keep_alive_ah.service
       dest: /lib/systemd/system/keep_alive_ah.service
 
-  # Configure certbot
 
   # Task to restart nginx with new configs
   - name: restart nginx due to config changes
