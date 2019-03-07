@@ -1,0 +1,15 @@
+[Unit]
+Description=Running ah on the background
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3000
+Type=simple
+User=ubuntu
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/bash /home/ubuntu/ah-code-titans-frontend/start_ah.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
