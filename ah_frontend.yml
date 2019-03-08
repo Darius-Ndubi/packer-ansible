@@ -82,6 +82,7 @@
   - name: Bash script to run the application
     shell: |
       touch /home/ubuntu/ah-code-titans-frontend/start_ah.sh && chmod u+x /home/ubuntu/ah-code-titans-frontend/start_ah.sh
+      echo "source .server" | tee /home/ubuntu/ah-code-titans-frontend/start_ah.sh
       echo "npm run start-js" | tee /home/ubuntu/ah-code-titans-frontend/start_ah.sh
 
 # Start the application
@@ -89,3 +90,4 @@
     shell: |
       sudo systemctl daemon-reload
       sudo systemctl start keep_alive_ah
+      sudo systemctl enable keep_alive_ah
